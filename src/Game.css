@@ -1,0 +1,36 @@
+.tile {
+  height: 30px;
+  width: 30px;
+  background: none;
+}
+.tile:focus {
+  outline: none;
+}
+.tile.grass {
+  background: darkseagreen;
+  border-color: green;
+  border-style: dotted;
+}
+.tile.water {
+  background: aqua;
+  border-color: peru;
+  border-style: dotted;
+}
+.tile.rock {
+  background-image: url('./images/rock.png');
+  background-size: 30px 30px;
+  border-style: solid;
+}
+.tile.tree {
+  background-image: url('./images/tree.png');
+  background-size: 30px 30px;
+  border-style: dotted;
+}
+.tile.player {
+  background-image: url('./images/player.png');
+  background-size: 30px 30px;
+  border-style: solid;
+}
+.App div div {
+  display: flex;
+}

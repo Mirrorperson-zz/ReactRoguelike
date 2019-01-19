@@ -1,0 +1,17 @@
+asp.NET mvc5, iisexpress, ngrok - cmd
+---
+cd \Program Files (x86)\IIS Express
+iisexpress /path:"C:\Users\Rabindra\Documents\Visual Studio 2015\Projects\PersonalWebsite\PersonalWebsite" /port:8080
+ngrok http -region eu -host-header="localhost:8080" 8080
+
+node.js, http-server, ngrok - powershell
+---
+npm start
+ngrok http -region eu -host-header="localhost:8080" 8080
+
+
+Resources
+---
+https://docs.microsoft.com/en-us/iis/extensions/using-iis-express/running-iis-express-from-the-command-line
+https://forum.laragon.org/topic/355/how-to-change-ngrok-location
+https://www.twilio.com/docs/usage/tutorials/how-use-ngrok-windows-and-visual-studio-test-webhooks
