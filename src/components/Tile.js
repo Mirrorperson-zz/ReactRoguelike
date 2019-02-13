@@ -2,7 +2,7 @@ import React from 'react';
 
 const Tile = props => {
   let tile;
-  //console.log(props.tileType);
+
   switch (props.tileType) {
     case 1:
       tile = <div className="tile grass" />;
@@ -17,7 +17,7 @@ const Tile = props => {
       tile = <div className="tile water" />;
       break;
     default:
-      tile = <div className="tile grass" />;
+      tile = <div className={props.tileType} />;
   }
 
   return tile;
