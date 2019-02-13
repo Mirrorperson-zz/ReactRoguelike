@@ -14,8 +14,8 @@ class Map extends Component {
     agentCounter: 0,
     columns: this.props.columns,
     rows: this.props.rows,
-    tileStates: [[]],
-    player: [0, 0],
+    tilesStates: [[]],
+    tilesAgentsStates: [[]],
     tileTypes: {
       player: 0,
       grass: 1,
