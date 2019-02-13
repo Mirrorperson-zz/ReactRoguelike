@@ -99,11 +99,15 @@ class Map extends Component {
         newPlayerPosition = null;
     }
 
-    if (stateChanged) {
+    GetAgentWithId('a0', newAgents).state.position = newPlayerPosition;
+
+    if (newPlayerPosition !== null) {
       this.setState(state => ({
-        player,
-        playerOn: this.state.tileStates[player[1]][player[0]], // Order matters store tile player moving to
-        tileStates: this.updatePlayerPos(player) // then move player
+        agents: newAgents,
+        playerOn: this.state.tilesStates[newPlayerPosition[1]][
+          newPlayerPosition[0]
+        ], // Order matters store tile player moving to
+        tileStates: this.updatePlayerPos(newPlayerPosition, oldPlayerPosition) // then move player
       }));
     }
   };
