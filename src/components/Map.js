@@ -68,34 +68,35 @@ class Map extends Component {
     // check keys
     ConsoleLogTest(this.state.test, 'key pressed ' + event.key);
 
-    let player = [...this.state.player];
-    let stateChanged = true;
+    let newAgents = [...this.state.agents];
+    let oldPlayerPosition = [...GetAgentWithId('a0', newAgents).state.position];
+    let newPlayerPosition;
 
     // TileStates is an array in an array; first array index is rows and send array index is columns.
     // Fist index controls vertical movement, second index controls horizontal movement
     switch (event.key) {
       case 'ArrowLeft':
-        player = [this.state.player[0] - 1, this.state.player[1]];
-        if (this.state.player[0] <= 0) return;
+        newPlayerPosition = [oldPlayerPosition[0] - 1, oldPlayerPosition[1]];
+        if (newPlayerPosition[0] <= 0) return;
         break;
 
       case 'ArrowRight':
-        player = [this.state.player[0] + 1, this.state.player[1]];
-        if (this.state.player[0] >= this.props.columns - 1) return;
+        newPlayerPosition = [oldPlayerPosition[0] + 1, oldPlayerPosition[1]];
+        if (newPlayerPosition[0] >= this.props.columns - 1) return;
         break;
 
       case 'ArrowUp':
-        player = [this.state.player[0], this.state.player[1] - 1];
-        if (this.state.player[1] <= 0) return;
+        newPlayerPosition = [oldPlayerPosition[0], oldPlayerPosition[1] - 1];
+        if (newPlayerPosition[1] <= 0) return;
         break;
 
       case 'ArrowDown':
-        player = [this.state.player[0], this.state.player[1] + 1];
-        if (this.state.player[1] >= this.props.rows - 1) return;
+        newPlayerPosition = [oldPlayerPosition[0], oldPlayerPosition[1] + 1];
+        if (newPlayerPosition[1] >= this.props.rows - 1) return;
         break;
 
       default:
-        stateChanged = false;
+        newPlayerPosition = null;
     }
 
     if (stateChanged) {
