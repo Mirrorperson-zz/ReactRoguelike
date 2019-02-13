@@ -268,7 +268,7 @@ class Map extends Component {
   // movement controls
   handleKeyPress = event => {
     // check keys
-    // console.log('key pressed ' + event.key);
+    ConsoleLogTest(this.state.test, 'key pressed ' + event.key);
 
     let player = [...this.state.player];
     let stateChanged = true;

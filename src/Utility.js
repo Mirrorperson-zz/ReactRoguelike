@@ -15,3 +15,11 @@ export const PondHasTile = function(pond, tile) {
 export const GetTile = function(state, row, column) {
   return state[row][column];
 };
+
+const ConsoleLogTest = (test, message) => {
+  if (test) {
+    console.log(message);
+  }
+};
+
+export { PondHasTile, GetTile, GetAgentWithId, GetAgentTypes, ConsoleLogTest };
