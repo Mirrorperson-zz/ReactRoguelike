@@ -26,7 +26,8 @@ class Map extends Component {
     tileOccuranceLimits: [0, 60, 75, 85, 100],
     playerOn: 1,
     ponds: [],
-    condenseLimit: 3
+    condenseLimit: 3,
+    agents: []
   };
 
   constructor(props) {
