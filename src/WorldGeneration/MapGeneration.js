@@ -35,7 +35,6 @@ const GetNewState = (props, state) => {
     }
   }
 
-  // WIP
   let allPonds = FindPonds(props, state, newState, newState);
   ResizePonds(state, allPonds, newState);
   ConsoleLogTest(state.test, allPonds);
