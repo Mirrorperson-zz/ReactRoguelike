@@ -33,12 +33,18 @@ class Map extends Component {
   constructor(props) {
     super(props);
 
+    var newAgents = InitializeAgents(this.state);
+    var newTilesStates = GetNewState(props, this.state);
+    var newTilesStateWithAgents = UpdateStateWithAgents(
+      newTilesStates,
+      newAgents
+    );
+
     this.state = {
       ...this.state,
-      tileStates: this.getNewState(),
-      playerOn: Math.floor(
-        Math.random() * (Object.keys(this.state.tileTypes).length - 1) + 1
-      )
+      agents: newAgents,
+      tilesStates: newTilesStates,
+      tilesAgentsStates: newTilesStateWithAgents
     };
   }
 
@@ -106,18 +112,20 @@ class Map extends Component {
   render() {
     return (
       <div tabIndex="0" onKeyDown={this.handleKeyPress}>
-        {this.state.tileStates.map((rows, index) => (
+        {this.state.tilesAgentsStates.map((rows, index) => (
           <div key={index}>
-            {this.state.tileStates[index].map((tileType, colIndex) =>
-              tileType === 0 ? (
-                <Player key={index * this.state.rows + colIndex} />
-              ) : (
-                <Tile
-                  tileType={tileType}
-                  key={index * this.state.rows + colIndex}
-                />
-              )
-            )}
+            {this.state.tilesAgentsStates[index].map((tileType, colIndex) => (
+              <Tile
+                tileType={
+                  tileType[0] === 'a'
+                    ? 'tile ' +
+                      GetAgentWithId(tileType, this.state.agents).state.type
+                    : tileType
+                }
+                key={index * this.state.rows + colIndex}
+                test={this.state.test}
+              />
+            ))}
           </div>
         ))}
       </div>
