@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import Tile from './Tile';
-import Player from './Player';
-import { PondHasTile, GetTile } from '../Utility';
+import Agent from './Agent';
+import { GetNewState } from '../WorldGeneration/MapGeneration';
+import {
+  UpdateStateWithAgents,
+  InitializeAgents
+} from '../WorldGeneration/AgentsGeneration';
+import { GetAgentWithId, ConsoleLogTest } from '../Utility';
 
 class Map extends Component {
   state = {
