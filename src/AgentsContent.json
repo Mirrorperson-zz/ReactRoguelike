@@ -1,0 +1,27 @@
+{
+  "player": {
+    "name": "player",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "startPosition": [1, 1]
+  },
+  "dog": {
+    "name": "dog",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5
+  },
+  "cat": {
+    "name": "cat",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5
+  }
+}

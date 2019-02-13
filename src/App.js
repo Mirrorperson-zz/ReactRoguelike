@@ -8,7 +8,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Map rows={10} columns={10} />
+        <Map rows={10} columns={10} test={true} />
       </div>
     );
   }
