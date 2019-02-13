@@ -49,20 +49,18 @@ class Map extends Component {
   }
 
   updatePlayerPos = (
-    playerLocation = [this.state.player[0], this.state.player[1]]
+    newPlayerPosition,
+    oldPlayerPosition
     // Flip when use as colums in rows means need [y,x]
   ) => {
-    let newPosState = this.state.tileStates.slice(0);
+    let newState = this.state.tilesStates.slice(0);
     // Add old tile player is on
-    newPosState[this.state.player[1]][
-      this.state.player[0]
-    ] = this.state.playerOn;
-    // Add player to new tile
-    newPosState[playerLocation[1]][playerLocation[0]] = this.state.tileTypes[
-      'player'
-    ];
+    newState[oldPlayerPosition[1]][oldPlayerPosition[0]] = this.state.playerOn;
 
-    return newPosState;
+    // Add player to new tile - a0 is player agent's id
+    newState[newPlayerPosition[1]][newPlayerPosition[0]] = 'a0';
+
+    return newState;
   };
 
   // movement controls
