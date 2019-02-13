@@ -10,6 +10,8 @@ import { GetAgentWithId, ConsoleLogTest } from '../Utility';
 
 class Map extends Component {
   state = {
+    test: this.props.test,
+    agentCounter: 0,
     columns: this.props.columns,
     rows: this.props.rows,
     tileStates: [[]],
