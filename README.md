@@ -2,7 +2,7 @@ Thoughts
 
 Agent is an abstract class for all living things in the game
 
-The stats and specifics of each species/race or whatever is going to be in a json file called AgentsContent so far
+The stats and specifics of each species/race or whatever is going to be in a json file called AgentsContent
 
 CompleteAgent is a stateless functional component whoose only job is to get the data from AgentsContent json make
 an agent with complete stats and other details with it
