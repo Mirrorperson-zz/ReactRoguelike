@@ -48,7 +48,7 @@ class Map extends Component {
         if (j === playerLocation[0] && i === playerLocation[1]) {
           newState[i].push(this.state.tileTypes['player']);
         } else {
-          let randomRoll = Math.floor(Math.random() * 99 - 1) + 1;
+          let randomRoll = Math.floor(Math.random() * 99) + 1;
 
           if (
             randomRoll >= this.state.tileOccuranceLimits[0] &&
