@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import Tile from './Tile';
 import Player from './Player';
-import { PondHasTile, GetTile } from '../Utility';
+import {
+  FindPonds,
+  FindAdjecentWaterTiles,
+  ResizePonds
+} from '../PondsGeneration';
 
 class Map extends Component {
   state = {
@@ -75,177 +79,11 @@ class Map extends Component {
       }
     }
 
-    // WIP
-    let allPonds = this.findPonds(newState, newState);
-    let resizedPonds = this.resizePonds(allPonds, newState);
+    let allPonds = FindPonds(newState, newState, this.props, this.state);
+    let resizedPonds = ResizePonds(allPonds, newState, this.state);
     console.log(allPonds);
 
     return newState;
-  };
-
-  findPonds = (allPonds, newState) => {
-    let newPonds = [];
-    let pondsEmpty;
-    let newPond;
-
-    for (let i = 0; i < this.props.rows; i++) {
-      for (let j = 0; j < this.props.columns; j++) {
-        if (allPonds[i][j] === this.state.tileTypes.water) {
-          pondsEmpty = !newPonds.length > 0;
-
-          // Check if any registered ponds exist
-          if (!pondsEmpty) {
-            // Check if tile is alread in a registered pond
-            let inPond = [];
-            for (let pondIndex = 0; pondIndex < newPonds.length; pondIndex++) {
-              inPond.push(PondHasTile(newPonds[pondIndex], [i, j]));
-            }
-
-            // If tile not in any existing ponds newPond is true
-            newPond = !inPond.includes(true);
-          }
-
-          // If no ponds exist or tile is of new pond
-          if (pondsEmpty || newPond) {
-            // Add new pond, first tile
-            let newPondArray = [[i, j]];
-            let checkTileRow;
-            let checkTileColumn;
-
-            // Check each adjecent tile is water, pushing new tiles into newPond
-            for (
-              let newPondTile = 0;
-              newPondTile < newPondArray.length;
-              newPondTile++
-            ) {
-              checkTileRow = newPondArray[newPondTile][0];
-              checkTileColumn = newPondArray[newPondTile][1];
-
-              //  Limit Tiles Check
-              if (newPondTile < 10) {
-                this.AddAdjecentWaterTiles(
-                  newState,
-                  checkTileRow,
-                  checkTileColumn,
-                  newPondArray
-                );
-              } else {
-                console.log('Error - newPondTile >= 10');
-              }
-            }
-
-            newPonds.push(newPondArray);
-          }
-        }
-      }
-    }
-
-    return newPonds;
-  };
-
-  AddAdjecentWaterTiles = (newState, row, column, pondArray) => {
-    // tile above unless at edge
-    if (
-      row !== 0 &&
-      GetTile(newState, row - 1, column) === this.state.tileTypes.water
-    ) {
-      // Check it's not a tile already added
-      if (!PondHasTile(pondArray, [row - 1, column])) {
-        pondArray.push([row - 1, column]);
-      }
-    }
-
-    // tile below unless at edge
-    if (
-      row !== this.state.rows - 1 &&
-      GetTile(newState, row + 1, column) === this.state.tileTypes.water
-    ) {
-      // Check it's not a tile already added
-      if (!PondHasTile(pondArray, [row + 1, column])) {
-        pondArray.push([row + 1, column]);
-      }
-    }
-
-    // tile left unless at edge
-    if (
-      column !== 0 &&
-      GetTile(newState, row, column - 1) === this.state.tileTypes.water
-    ) {
-      // Check it's not a tile already added
-      if (!PondHasTile(pondArray, [row, column - 1])) {
-        pondArray.push([row, column - 1]);
-      }
-    }
-
-    // tile right unless at edge
-    if (
-      column !== this.state.columns - 1 &&
-      GetTile(newState, row, column + 1) === this.state.tileTypes.water
-    ) {
-      // Check it's not a tile already added
-      if (!PondHasTile(pondArray, [row, column + 1])) {
-        pondArray.push([row, column + 1]);
-      }
-    }
-  };
-
-  resizePonds = (allPonds, newState) => {
-    let condenseCurrent = 0;
-    let tileCount = 0;
-    let condenseLimit = this.state.condenseLimit;
-    let water = this.state.tileTypes['water'];
-    let rows = this.state.rows;
-
-    return allPonds.map(function(pond) {
-      condenseCurrent = Math.floor(Math.random() * condenseLimit - 1) + 1;
-
-      // if only one tile in pond then resize with condenseCurrent
-      if (pond.length < 3) {
-        for (
-          let expandCount = 0;
-          expandCount < condenseCurrent;
-          expandCount++
-        ) {
-          pond.map(function(pondTile) {
-            if (
-              pondTile[0] !== 0 &&
-              newState[pondTile[0] - 1][pondTile[1]] !== water &&
-              expandCount < condenseCurrent
-            ) {
-              newState[pondTile[0] - 1][pondTile[1]] = water;
-              expandCount++;
-            }
-
-            if (
-              pondTile[0] !== rows - 1 &&
-              newState[pondTile[0] + 1][pondTile[1]] !== water &&
-              expandCount < condenseCurrent
-            ) {
-              newState[pondTile[0] + 1][pondTile[1]] = water;
-              expandCount++;
-            }
-
-            if (
-              pondTile[1] !== 0 &&
-              newState[pondTile[0]][pondTile[1] - 1] !== water &&
-              expandCount < condenseCurrent
-            ) {
-              newState[pondTile[0]][pondTile[1] - 1] = water;
-              expandCount++;
-            }
-
-            if (
-              pondTile[1] !== rows - 1 &&
-              newState[pondTile[0]][pondTile[1] + 1] !== water &&
-              expandCount < condenseCurrent
-            ) {
-              newState[pondTile[0]][pondTile[1] + 1] = water;
-              expandCount++;
-            }
-          });
-        }
-      }
-    });
   };
 
   updatePlayerPos = (
