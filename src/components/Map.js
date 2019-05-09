@@ -96,12 +96,12 @@ class Map extends Component {
         break;
 
       default:
-        newPlayerPosition = null;
+        newPlayerPosition = oldPlayerPosition;
     }
 
     GetAgentWithId('a0', newAgents).state.position = newPlayerPosition;
 
-    if (newPlayerPosition !== null) {
+    if (newPlayerPosition !== oldPlayerPosition) {
       this.setState(state => ({
         agents: newAgents,
         playerOn: this.state.tilesStates[newPlayerPosition[1]][
