@@ -6,7 +6,8 @@
     "dex": 5,
     "wis": 5,
     "int": 5,
-    "startPosition": [1, 1]
+    "startPosition": [1, 1],
+    "genericTags": ""
   },
   "dog": {
     "name": "dog",
@@ -14,7 +15,8 @@
     "agi": 5,
     "dex": 5,
     "wis": 5,
-    "int": 5
+    "int": 5,
+    "genericTags": ""
   },
   "cat": {
     "name": "cat",
@@ -22,6 +24,88 @@
     "agi": 5,
     "dex": 5,
     "wis": 5,
-    "int": 5
+    "int": 5,
+    "genericTags": ""
+  },
+  "snake": {
+    "name": "snake",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "pigeon": {
+    "name": "pigeon",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "bear": {
+    "name": "bear",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "piranha": {
+    "name": "piranha",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "alligator": {
+    "name": "alligator",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "tarantula": {
+    "name": "tarantula",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "sydney-funnel-web": {
+    "name": "sydney-funnel-web",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "gorilla": {
+    "name": "gorilla",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
+  },
+  "silverback-gorilla": {
+    "name": "silverback-gorilla",
+    "str": 5,
+    "agi": 5,
+    "dex": 5,
+    "wis": 5,
+    "int": 5,
+    "genericTags": ""
   }
 }
