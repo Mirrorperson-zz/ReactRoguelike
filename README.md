@@ -9,6 +9,8 @@ an agent with complete stats and other details with it
 
 This generic design hopefully means I dont have to make a lot of classes for each living thing
 
+Movement onto grids in the second outer layer should move the screen to show new areas. The state of the whole map can be kept in arrays, these arrays will need to be ever expandable and manipulated cleverly to keep the world persistence seemless.
+
 ---
 
 Branch current-wip-stuff exists only to allow moving unfinished work around
