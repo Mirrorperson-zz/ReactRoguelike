@@ -2,6 +2,8 @@
   height: 30px;
   width: 30px;
   background: none;
+  background-size: 30px 30px;
+  border-style: solid;
 }
 .tile:focus {
   outline: none;
@@ -18,18 +20,46 @@
 }
 .tile.rock {
   background-image: url('./images/rock.png');
-  background-size: 30px 30px;
-  border-style: solid;
 }
 .tile.tree {
   background-image: url('./images/tree.png');
-  background-size: 30px 30px;
   border-style: dotted;
 }
 .tile.player {
   background-image: url('./images/player.png');
-  background-size: 30px 30px;
-  border-style: solid;
+}
+.tile.dog {
+  background-image: url('./images/dogStub.png');
+}
+.tile.cat {
+  background-image: url('./images/catStub.png');
+}
+.tile.snake {
+  background-image: url('./images/snakeStub.png');
+}
+.tile.pigeon {
+  background-image: url('./images/pigeonStub.png');
+}
+.tile.bear {
+  background-image: url('./images/bearStub.png');
+}
+.tile.piranha {
+  background-image: url('./images/piranhaStub.png');
+}
+.tile.alligator {
+  background-image: url('./images/alligatorStub.png');
+}
+.tile.tarantula {
+  background-image: url('./images/tarantulaStub.png');
+}
+.tile.sydney-funnel-web {
+  background-image: url('./images/sydney-funnel-webStub.png');
+}
+.tile.gorilla {
+  background-image: url('./images/gorillaStub.png');
+}
+.tile.silverback-gorilla {
+  background-image: url('./images/silverback-gorillaStub.png');
 }
 .App div div {
   display: flex;
