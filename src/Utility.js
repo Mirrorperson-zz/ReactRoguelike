@@ -19,10 +19,9 @@ const GetTile = (state, row, column) => {
 };
 
 const GetAgentWithId = (id, agents) => {
-  agents.find(agent => {
+  return agents.find(agent => {
     return agent.state.id === id;
   });
-  return agents[0];
 };
 
 const GetAgentTypes = () => {
