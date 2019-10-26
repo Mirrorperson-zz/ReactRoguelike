@@ -113,7 +113,7 @@ class Map extends Component {
   };
 
   render() {
-    ConsoleLogTest(this.state.tilesAgentsStates);
+    ConsoleLogTest(this.state.test, this.state.tilesAgentsStates);
     return (
       <div tabIndex="0" onKeyDown={this.handleKeyPress}>
         {this.state.tilesAgentsStates.map((rows, index) => (
