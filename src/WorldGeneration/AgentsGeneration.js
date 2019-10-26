@@ -6,6 +6,7 @@ import {
   RollRandom
 } from '../Utility';
 import AgentsData from '../AgentsContent.json';
+import lodashLang from 'lodash/lang';
 
 const InitializeAgents = (state, newTilesStates) => {
   let newAgents = [...state.agents];
@@ -19,6 +20,10 @@ const InitializeAgents = (state, newTilesStates) => {
     row.forEach((columnTile, columni) => {
       // Roll about 10% for if there is an agent in tile
       let shouldCreateAgent = RollRandom(100) < 10 ? true : false;
+
+      if (lodashLang.isEqual(player.state.position, [rowi, columni])) {
+        shouldCreateAgent = false;
+      }
 
       if (shouldCreateAgent) {
         // Roll another for what agent it should be, chances depending on tile type
