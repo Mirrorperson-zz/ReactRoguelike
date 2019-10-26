@@ -7,6 +7,10 @@ class Agent extends Component {
   constructor(props) {
     super(props);
 
+    let position = props.position
+      ? props.position
+      : AgentsData[props.type].startPosition;
+
     this.state = {
       id: props.id,
       type: props.type,
@@ -15,7 +19,7 @@ class Agent extends Component {
       dex: AgentsData[props.type].dex,
       wis: AgentsData[props.type].wis,
       int: AgentsData[props.type].int,
-      position: AgentsData[props.type].startPosition
+      position: position
     };
   }
 }
