@@ -17,11 +17,10 @@ class Map extends Component {
     tilesStates: [[]],
     tilesAgentsStates: [[]],
     tileTypes: {
-      player: 0,
-      grass: 1,
-      rock: 2,
-      tree: 3,
-      water: 4
+      grass: 0,
+      rock: 1,
+      tree: 2,
+      water: 3
     },
     tileOccuranceLimits: [0, 60, 75, 85, 100],
     playerOn: 1,
@@ -33,9 +32,9 @@ class Map extends Component {
   constructor(props) {
     super(props);
 
-    var newAgents = InitializeAgents(this.state);
-    var newTilesStates = GetNewState(props, this.state);
-    var newTilesStateWithAgents = UpdateStateWithAgents(
+    let newTilesStates = GetNewState(props, this.state);
+    let newAgents = InitializeAgents(this.state, newTilesStates);
+    let newTilesStateWithAgents = UpdateStateWithAgents(
       newTilesStates,
       newAgents
     );
@@ -44,7 +43,8 @@ class Map extends Component {
       ...this.state,
       agents: newAgents,
       tilesStates: newTilesStates,
-      tilesAgentsStates: newTilesStateWithAgents
+      tilesAgentsStates: newTilesStateWithAgents,
+      agentCounter: this.state.agentCounter + newAgents.length
     };
   }
 
@@ -113,6 +113,7 @@ class Map extends Component {
   };
 
   render() {
+    ConsoleLogTest(this.state.tilesAgentsStates);
     return (
       <div tabIndex="0" onKeyDown={this.handleKeyPress}>
         {this.state.tilesAgentsStates.map((rows, index) => (
