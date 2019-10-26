@@ -152,7 +152,7 @@ const AddAdjecentWaterTiles = (state, newState, row, column, pondArray) => {
 const ResizePonds = (state, allPonds, newState) => {
   let condenseCurrent = 0;
   let condenseLimit = state.condenseLimit;
-  let water = state.tileTypes['water'];
+  let water = state.tileTypes.water;
   let rows = state.rows;
 
   return allPonds.map(function(pond) {
