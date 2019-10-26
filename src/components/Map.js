@@ -121,7 +121,7 @@ class Map extends Component {
             {this.state.tilesAgentsStates[index].map((tileType, colIndex) => (
               <Tile
                 tileType={
-                  tileType[0] === 'a'
+                  tileType[0] === 'a' // is agent
                     ? 'tile ' +
                       GetAgentWithId(tileType, this.state.agents).state.type
                     : tileType
