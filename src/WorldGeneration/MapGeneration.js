@@ -1,4 +1,4 @@
-import { PondHasTile, GetTile, ConsoleLogTest } from '../Utility';
+import { PondHasTile, GetTile, ConsoleLogTest, RollRandom } from '../Utility';
 
 const GetNewState = (props, state) => {
   let newState = [];
@@ -9,7 +9,7 @@ const GetNewState = (props, state) => {
 
   for (let i = 0; i < props.rows; i++) {
     for (let j = 0; j < props.columns; j++) {
-      let randomRoll = Math.floor(Math.random() * 99 - 1) + 1;
+      let randomRoll = RollRandom(100);
 
       if (
         randomRoll >= state.tileOccuranceLimits[0] &&
@@ -152,7 +152,7 @@ const AddAdjecentWaterTiles = (state, newState, row, column, pondArray) => {
 const ResizePonds = (state, allPonds, newState) => {
   let condenseCurrent = 0;
   let condenseLimit = state.condenseLimit;
-  let water = state.tileTypes['water'];
+  let water = state.tileTypes.water;
   let rows = state.rows;
 
   return allPonds.map(function(pond) {

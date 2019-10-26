@@ -34,4 +34,15 @@ const ConsoleLogTest = (test, message) => {
   }
 };
 
-export { PondHasTile, GetTile, GetAgentWithId, GetAgentTypes, ConsoleLogTest };
+const RollRandom = (max, min = 1) => {
+  return Math.floor(Math.random() * max - 1) + min;
+};
+
+export {
+  PondHasTile,
+  GetTile,
+  GetAgentWithId,
+  GetAgentTypes,
+  ConsoleLogTest,
+  RollRandom
+};
