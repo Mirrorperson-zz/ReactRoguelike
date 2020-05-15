@@ -45,7 +45,7 @@ const InitializeAgents = (state, newTilesStates) => {
 
         // Get key/name of agentToCreate from AgentsData after removing player
         let agentName = Object.keys(AgentsData).filter(
-          agent => agent !== 'player'
+          (agentName) => agentName !== 'player'
         )[agentToCreate];
 
         newAgents.push(
@@ -71,7 +71,7 @@ const UpdateStateWithAgents = (newTilesStates, newAgents) => {
   let playerPosition = playerAgent.state.position;
   newTilesStates[playerPosition[1]][playerPosition[0]] = playerAgent.state.id;
 
-  newAgents.forEach(agent => {
+  newAgents.forEach((agent) => {
     let agentPosition = agent.state.position;
     newTilesStates[agentPosition[1]][agentPosition[0]] = agent.state.id;
   });
