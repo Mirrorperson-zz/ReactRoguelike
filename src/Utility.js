@@ -1,5 +1,7 @@
 import AgentsData from './AgentsContent.json';
 
+const GetPlayerAgentId = () => 'a0';
+
 const PondHasTile = (pond, tile) => {
   let arrayChecks = pond.map(function(pondTile) {
     // Check if each tile in pond is same as tile
@@ -19,7 +21,7 @@ const GetTile = (state, row, column) => {
 };
 
 const GetAgentWithId = (id, agents) => {
-  return agents.find(agent => {
+  return agents.find((agent) => {
     return agent.state.id === id;
   });
 };
@@ -35,7 +37,7 @@ const ConsoleLogTest = (test, message) => {
 };
 
 const RollRandom = (max, min = 1) => {
-  return Math.floor(Math.random() * max - 1) + min;
+  return Math.floor(Math.random() * (max - 1)) + min;
 };
 
 export {
@@ -44,5 +46,6 @@ export {
   GetAgentWithId,
   GetAgentTypes,
   ConsoleLogTest,
-  RollRandom
+  RollRandom,
+  GetPlayerAgentId
 };
