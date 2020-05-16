@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Tile from './Tile';
 import Agent from './Agent';
+import { HandleEvent, HandleAgentEvents } from './Events';
 import { GetNewState } from '../WorldGeneration/MapGeneration';
 import {
   UpdateStateWithAgents,
   InitializeAgents
 } from '../WorldGeneration/AgentsGeneration';
-import { GetAgentWithId, ConsoleLogTest } from '../Utility';
+import { GetPlayerAgentId, GetAgentWithId, ConsoleLogTest } from '../Utility';
+import _ from 'lodash';
 
 class Map extends Component {
   state = {
@@ -23,16 +25,21 @@ class Map extends Component {
       water: 3
     },
     tileOccuranceLimits: [0, 60, 75, 85, 100],
-    playerOn: 1,
     ponds: [],
     condenseLimit: 3,
-    agents: []
+    agents: [],
+    playerPosFrontEdgeGap: 2,
+    playerPosBackEdgeGap: 2
   };
 
   constructor(props) {
     super(props);
 
-    let newTilesStates = GetNewState(props, this.state);
+    let newTilesStates = GetNewState(
+      props,
+      this.state,
+      this.state.tileOccuranceLimits
+    );
     let newAgents = InitializeAgents(this.state, newTilesStates);
     let newTilesStateWithAgents = UpdateStateWithAgents(
       newTilesStates,
