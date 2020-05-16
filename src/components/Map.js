@@ -75,9 +75,16 @@ class Map extends Component {
     }
   };
 
+  componentDidUpdate() {
+    let newState = HandleAgentEvents(this.state.agents, this.state);
 
+    if (newState !== undefined) {
+      this.setState((state) => ({
+        agents: newState.agents,
+        tileStates: newState.tileStates
       }));
     }
+  }
 
   render() {
     ConsoleLogTest(this.state.test, this.state.tilesAgentsStates);
