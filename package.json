@@ -1,6 +1,6 @@
 {
-  "homepage": "https://Mirrorperson.github.io/ReactRoguelike",
-  "name": "roguelike-hell",
+  "homepage": "https://mirrorperson.github.io/ReactRoguelike",
+  "name": "reactroguelike",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,5 +25,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
+  }
 }
