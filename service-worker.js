@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/reactroguelike/precache-manifest.4b5965e58cdc53acfa098c4d27c4732d.js"
+  "/ReactRoguelike/precache-manifest.276b7c5e781c85ff0e890448393f5a2f.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/reactroguelike/index.html", {
+workbox.routing.registerNavigationRoute("/ReactRoguelike/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
