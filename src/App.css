@@ -2,6 +2,25 @@
   margin: 5em;
 }
 
+.App-interface {
+  margin-top: 2em;
+  margin-left: 5em;
+}
+
+.App-interface #height {
+  width: 1.5em;
+  text-align: right;
+}
+
+.App-interface #width {
+  width: 1.5em;
+  text-align: right;
+}
+
+.App-interface .spaced-element {
+  margin-left: 1.5em;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -29,4 +48,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.hidden {
+  display: none;
 }
