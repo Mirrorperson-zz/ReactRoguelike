@@ -17,8 +17,42 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Map rows={10} columns={10} test={true} />
+      <div>
+        <form
+          className={`App-interface ${this.state.setSize ? '' : 'hidden'}`}
+          onSubmit={this.handleSubmit}
+        >
+          <label>
+            Select map size{' '}
+            <span className={`${this.state.invalidSize ? 'warning-text' : ''}`}>
+              (min: 7, max: 20)
+            </span>
+          </label>
+          <br />
+          <label>Height: </label>
+          <input
+            type="int"
+            id="height"
+            value={this.state.height}
+            onChange={this.handleChange}
+          />
+
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+          <label id="lblWidth">Width: </label>
+          <input
+            type="int"
+            id="width"
+            value={this.state.width}
+            onChange={this.handleChange}
+          />
+
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+          <input id="Submit" type="submit" />
+        </form>
+
+        <div id="App" className="App" />
       </div>
     );
   }
