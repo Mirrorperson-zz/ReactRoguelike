@@ -1,0 +1,7 @@
+The map is a series of divs. Represented my nested array of numbers corresponting to tile types.
+
+The div's default block layout lays them vertically and then horizontal for nested elements.
+This conflicted with how I want access elements in nested array. Access should be NestedArray[x][y], x/horizontal first and then yth element/vertical.
+In UpdateAgentPosition I had to swap order of x/0, y/1 access to compensate.
+
+Appreantly solution was to use flex layout and flex-direction allows divs to be layed out horizontally first and then vertically within each div.
