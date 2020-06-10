@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Map from './components/Map';
 import './App.css';
 import './Game.css';
+import ReactDom from 'react-dom';
 
 class App extends Component {
   constructor(props) {
@@ -14,6 +15,19 @@ class App extends Component {
       invalidSize: false
     };
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    const app = (
+      // How many rows there are determines heigt, columns determines width
+      <Map rows={this.state.height} columns={this.state.width} test={true} />
+    );
+
+    ReactDom.render(app, document.getElementById('App'));
+
+    this.setState({ setSize: false });
+  };
 
   handleChange = (event) => {
     if (event.target.id === 'width') {
