@@ -15,6 +15,18 @@ class App extends Component {
     };
   }
 
+  handleChange = (event) => {
+    if (event.target.id === 'width') {
+      this.setState({
+        width: event.target.value
+      });
+    } else {
+      this.setState({
+        height: event.target.value
+      });
+    }
+  };
+
   render() {
     return (
       <div>
