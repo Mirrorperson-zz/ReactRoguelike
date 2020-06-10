@@ -61,6 +61,12 @@
 .tile.silverback-gorilla {
   background-image: url('./images/silverback-gorillaStub.png');
 }
+.App div {
+  display: flex;
+  flex-direction: row;
+}
 .App div div {
   display: flex;
+  flex-direction: column;
+}
 }

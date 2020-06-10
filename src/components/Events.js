@@ -11,8 +11,6 @@ const GetNewAgentPosition = (
 ) => {
   let newPosition;
 
-  // TileStates is arrays within array; first index is rows, second index is columns.
-  // Swap indexes on setting position - 0 index horizontal, 1 index vertical
   switch (eventKey) {
     case 'ArrowLeft':
       newPosition = [oldPosition[0] - 1, oldPosition[1]];
@@ -43,23 +41,21 @@ const GetNewAgentPosition = (
   return newPosition;
 };
 
-// Need to make this generic update agent position
 const UpdateAgentPosition = (
   agent,
   newAgentPosition,
   oldAgentPosition,
   tilesStates
-  // Flip when use as colums in rows means need [y,x]
 ) => {
   let newState = tilesStates.slice(0);
   // Add old tile code player is on
-  newState[oldAgentPosition[1]][oldAgentPosition[0]] =
+  newState[oldAgentPosition[0]][oldAgentPosition[1]] =
     agent.state.tileCodeAgentOn;
 
   agent.UpdateAgent(newAgentPosition, tilesStates);
 
   // Add agent to new tile
-  newState[newAgentPosition[1]][newAgentPosition[0]] = agent.state.id;
+  newState[newAgentPosition[0]][newAgentPosition[1]] = agent.state.id;
 
   return newState;
 };
