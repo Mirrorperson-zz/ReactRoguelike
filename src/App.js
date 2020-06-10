@@ -5,6 +5,16 @@ import './App.css';
 import './Game.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: 10,
+      height: 10,
+      setSize: true,
+      invalidSize: false
+    };
+  }
+
   render() {
     return (
       <div className="App">
