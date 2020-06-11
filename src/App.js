@@ -19,6 +19,17 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
+    // max size 20, min size 7
+    if (
+      this.state.height > 20 ||
+      this.state.width > 20 ||
+      this.state.height < 7 ||
+      this.state.width < 7
+    ) {
+      this.setState({ invalidSize: true });
+      return;
+    }
+
     const app = (
       // How many rows there are determines heigt, columns determines width
       <Map rows={this.state.height} columns={this.state.width} test={true} />
