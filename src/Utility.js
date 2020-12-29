@@ -47,8 +47,11 @@ const ConsoleLogTest = (test, message) => {
   }
 };
 
+// does not work with negative numbers
 const RollRandom = (max, min = 1) => {
-  return Math.floor(Math.random() * (max - 1)) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
 };
 
 export {
@@ -58,7 +61,7 @@ export {
   GetAgentTypes,
   ConsoleLogTest,
   RollRandom,
-  GetPlayerAgentId
+  GetPlayerAgentId,
   GetTargetAgent,
   GetAgentIndexWithId,
 };
