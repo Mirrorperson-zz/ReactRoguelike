@@ -78,6 +78,7 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
     EvaluateCombat(agent, enemyAgent, newAgents);
   }
 
+  agent.UpdateAgent(newAgentPosition);
   let newTilesAgentsStates = UpdateStateWithAgents(
     state.tilesStates,
     newAgents
@@ -85,7 +86,7 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
 
   return {
     agents: newAgents,
-    tilesStates: newTilesStates // then move player
+    tilesAgentsStates: newTilesAgentsStates // then move player
   };
 };
 
