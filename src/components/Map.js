@@ -78,8 +78,16 @@ class Map extends Component {
   componentDidUpdate() {
     let newState = HandleAgentEvents(this.state.agents, this.state);
 
-    if (newState !== undefined) {
-      this.setState((state) => ({
+    let stateActiveAgentIdAndDirection = HandleAgentEvents(this.state);
+
+    if (stateActiveAgentIdAndDirection === null) {
+      // players turn next
+      this.setState((state) => ({ playersTurn: true }));
+      return;
+    } else {
+      [newState, activeAgentId, moveDirection] = stateActiveAgentIdAndDirection;
+    }
+
         agents: newState.agents,
         tileStates: newState.tileStates
       }));
