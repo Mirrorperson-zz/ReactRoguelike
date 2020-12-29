@@ -1,5 +1,7 @@
 import AgentsData from './AgentsContent.json';
 
+const GetPlayerAgentId = () => 'a0';
+
 const PondHasTile = (pond, tile) => {
   let arrayChecks = pond.map(function(pondTile) {
     // Check if each tile in pond is same as tile
@@ -18,10 +20,21 @@ const GetTile = (state, row, column) => {
   return state[row][column];
 };
 
-const GetAgentWithId = (id, agents) => {
-  return agents.find(agent => {
+const GetAgentIndexWithId = (id, agents) => {
+  return agents.findIndex((agent) => {
     return agent.state.id === id;
   });
+};
+
+const GetAgentWithId = (id, agents) => {
+  return agents.find((agent) => {
+    return agent.state.id === id;
+  });
+};
+
+const GetTargetAgent = (position, agents, state) => {
+  let agentId = state.tilesAgentsStates[position[0]][position[1]];
+  return GetAgentWithId(agentId, agents);
 };
 
 const GetAgentTypes = () => {
@@ -34,8 +47,20 @@ const ConsoleLogTest = (test, message) => {
   }
 };
 
+// does not work with negative numbers
 const RollRandom = (max, min = 1) => {
-  return Math.floor(Math.random() * max - 1) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
+const UpdateStateWithAgents = (newTilesStates, newAgents) => {
+  let newTilesAgentsStates = [...newTilesStates.map((x) => [...x])];
+
+  newAgents.forEach((agent) => {
+    let agentPosition = agent.state.position;
+    newTilesAgentsStates[agentPosition[0]][agentPosition[1]] = agent.state.id;
+  });
+
+  return newTilesAgentsStates;
 };
 
 export {
@@ -44,5 +69,9 @@ export {
   GetAgentWithId,
   GetAgentTypes,
   ConsoleLogTest,
-  RollRandom
+  RollRandom,
+  GetPlayerAgentId,
+  GetTargetAgent,
+  GetAgentIndexWithId,
+  UpdateStateWithAgents
 };

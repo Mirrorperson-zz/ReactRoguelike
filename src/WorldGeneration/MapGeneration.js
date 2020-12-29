@@ -1,6 +1,6 @@
 import { PondHasTile, GetTile, ConsoleLogTest, RollRandom } from '../Utility';
 
-const GetNewState = (props, state) => {
+const GetNewState = (props, state, tileOccuranceLimits, test = false) => {
   let newState = [];
 
   for (let i = 0; i < props.rows; i++) {
@@ -12,32 +12,32 @@ const GetNewState = (props, state) => {
       let randomRoll = RollRandom(100);
 
       if (
-        randomRoll >= state.tileOccuranceLimits[0] &&
-        randomRoll < state.tileOccuranceLimits[1]
+        randomRoll >= tileOccuranceLimits[0] &&
+        randomRoll < tileOccuranceLimits[1]
       ) {
-        newState[i].push(1);
+        newState[i].push(state.tileTypes.grass);
       } else if (
-        randomRoll >= state.tileOccuranceLimits[1] &&
-        randomRoll < state.tileOccuranceLimits[2]
+        randomRoll >= tileOccuranceLimits[1] &&
+        randomRoll < tileOccuranceLimits[2]
       ) {
-        newState[i].push(2);
+        newState[i].push(state.tileTypes.rock);
       } else if (
-        randomRoll >= state.tileOccuranceLimits[2] &&
-        randomRoll < state.tileOccuranceLimits[3]
+        randomRoll >= tileOccuranceLimits[2] &&
+        randomRoll < tileOccuranceLimits[3]
       ) {
-        newState[i].push(3);
+        newState[i].push(state.tileTypes.tree);
       } else if (
-        randomRoll >= state.tileOccuranceLimits[3] &&
-        randomRoll < state.tileOccuranceLimits[4]
+        randomRoll >= tileOccuranceLimits[3] &&
+        randomRoll < tileOccuranceLimits[4]
       ) {
-        newState[i].push(4);
+        newState[i].push(state.tileTypes.water);
       }
     }
   }
 
   let allPonds = FindPonds(props, state, newState, newState);
   ResizePonds(state, allPonds, newState);
-  ConsoleLogTest(state.test, allPonds);
+  ConsoleLogTest(test, allPonds);
 
   return newState;
 };

@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import Tile from './Tile';
 import Agent from './Agent';
+import { HandleEvent, HandleAgentEvents } from './Events';
 import { GetNewState } from '../WorldGeneration/MapGeneration';
+import { InitializeAgents } from '../WorldGeneration/AgentsGeneration';
 import {
-  UpdateStateWithAgents,
-  InitializeAgents
-} from '../WorldGeneration/AgentsGeneration';
-import { GetAgentWithId, ConsoleLogTest } from '../Utility';
+  GetPlayerAgentId,
+  GetAgentWithId,
+  ConsoleLogTest,
+  UpdateStateWithAgents
+} from '../Utility';
+import _ from 'lodash';
+import $ from 'jquery';
+window.jQuery = window.$ = $;
 
 class Map extends Component {
   state = {
@@ -23,16 +29,21 @@ class Map extends Component {
       water: 3
     },
     tileOccuranceLimits: [0, 60, 75, 85, 100],
-    playerOn: 1,
     ponds: [],
     condenseLimit: 3,
-    agents: []
+    agents: [],
+    playerPosEdgeGap: 2,
+    playersTurn: true
   };
 
   constructor(props) {
     super(props);
 
-    let newTilesStates = GetNewState(props, this.state);
+    let newTilesStates = GetNewState(
+      props,
+      this.state,
+      this.state.tileOccuranceLimits
+    );
     let newAgents = InitializeAgents(this.state, newTilesStates);
     let newTilesStateWithAgents = UpdateStateWithAgents(
       newTilesStates,
@@ -48,69 +59,99 @@ class Map extends Component {
     };
   }
 
-  updatePlayerPos = (
-    newPlayerPosition,
-    oldPlayerPosition
-    // Flip when use as colums in rows means need [y,x]
-  ) => {
-    let newState = this.state.tilesStates.slice(0);
-    // Add old tile player is on
-    newState[oldPlayerPosition[1]][oldPlayerPosition[0]] = this.state.playerOn;
-
-    // Add player to new tile - a0 is player agent's id
-    newState[newPlayerPosition[1]][newPlayerPosition[0]] = 'a0';
-
-    return newState;
-  };
-
   // movement controls
-  handleKeyPress = event => {
-    // check keys
-    ConsoleLogTest(this.state.test, 'key pressed ' + event.key);
-
-    let newAgents = [...this.state.agents];
-    let oldPlayerPosition = [...GetAgentWithId('a0', newAgents).state.position];
-    let newPlayerPosition;
-
-    // TileStates is an array in an array; first array index is rows and send array index is columns.
-    // Fist index controls vertical movement, second index controls horizontal movement
-    switch (event.key) {
-      case 'ArrowLeft':
-        newPlayerPosition = [oldPlayerPosition[0] - 1, oldPlayerPosition[1]];
-        if (newPlayerPosition[0] <= 0) return;
-        break;
-
-      case 'ArrowRight':
-        newPlayerPosition = [oldPlayerPosition[0] + 1, oldPlayerPosition[1]];
-        if (newPlayerPosition[0] >= this.props.columns - 1) return;
-        break;
-
-      case 'ArrowUp':
-        newPlayerPosition = [oldPlayerPosition[0], oldPlayerPosition[1] - 1];
-        if (newPlayerPosition[1] <= 0) return;
-        break;
-
-      case 'ArrowDown':
-        newPlayerPosition = [oldPlayerPosition[0], oldPlayerPosition[1] + 1];
-        if (newPlayerPosition[1] >= this.props.rows - 1) return;
-        break;
-
-      default:
-        newPlayerPosition = oldPlayerPosition;
+  handleKeyPress = (event) => {
+    // discard input
+    if (!this.state.playersTurn) {
+      return;
     }
 
-    GetAgentWithId('a0', newAgents).state.position = newPlayerPosition;
+    let player = GetAgentWithId(GetPlayerAgentId(), this.state.agents);
+    let oldPlayerPosition = [...player.state.position];
 
-    if (newPlayerPosition !== oldPlayerPosition) {
-      this.setState(state => ({
-        agents: newAgents,
-        playerOn: this.state.tilesStates[newPlayerPosition[1]][
-          newPlayerPosition[0]
-        ], // Order matters store tile player moving to
-        tileStates: this.updatePlayerPos(newPlayerPosition, oldPlayerPosition) // then move player
+    let newState = HandleEvent(
+      GetPlayerAgentId(),
+      oldPlayerPosition,
+      event.key,
+      this.state
+    );
+
+    if (!_.isEqual(player.state.position, oldPlayerPosition)) {
+      this.setState((state) => ({
+        agents: newState.agents,
+        tilesAgentsStates: newState.tilesAgentsStates,
+        playersTurn: false
       }));
     }
   };
+
+  componentDidUpdate() {
+    // player's turn handled by handleKeyPress
+    if (this.state.playersTurn) {
+      return;
+    }
+
+    let thisAppMap = this,
+      newState,
+      activeAgentId,
+      absolutePosition,
+      moveDirection,
+      tileDimention = 36;
+
+    let stateActiveAgentIdAndDirection = HandleAgentEvents(this.state);
+
+    if (stateActiveAgentIdAndDirection === null) {
+      // players turn next
+      this.setState((state) => ({ playersTurn: true }));
+      return;
+    } else {
+      [newState, activeAgentId, moveDirection] = stateActiveAgentIdAndDirection;
+    }
+
+    // animation start
+    var animateAgent = $(`#${activeAgentId}`);
+    absolutePosition = animateAgent.position();
+
+    // Cannot read property 'left' of undefined - absolutePosition occur if
+    // original tile is not on dom because of collison - if combat system were
+    // in place agent would be removed so it couldn't move if it wasnt in the dom
+    $(`#${activeAgentId}`)
+      .clone()
+      .prop('id', `${activeAgentId}Clone`)
+      .css({
+        position: 'absolute',
+        left: absolutePosition.left,
+        top: absolutePosition.top
+      })
+      .appendTo($(`#${activeAgentId}`).parent());
+
+    $(`#${activeAgentId}`).addClass('tile-clone');
+
+    let movedCss;
+    switch (moveDirection) {
+      case 'ArrowLeft':
+        movedCss = { left: absolutePosition.left - tileDimention };
+        break;
+      case 'ArrowUp':
+        movedCss = { top: absolutePosition.top - tileDimention };
+        break;
+      case 'ArrowRight':
+        movedCss = { left: absolutePosition.left + tileDimention };
+        break;
+      case 'ArrowDown':
+        movedCss = { top: absolutePosition.top + tileDimention };
+        break;
+    }
+
+    $(`#${activeAgentId}Clone`).animate(movedCss, 1000, () => {
+      // remove clones update state
+      $(`div[id$=Clone]`).remove();
+      thisAppMap.setState((state) => ({
+        agents: newState.agents,
+        tilesAgentsStates: newState.tilesAgentsStates
+      }));
+    });
+  }
 
   render() {
     ConsoleLogTest(this.state.test, this.state.tilesAgentsStates);
@@ -118,18 +159,23 @@ class Map extends Component {
       <div tabIndex="0" onKeyDown={this.handleKeyPress}>
         {this.state.tilesAgentsStates.map((rows, index) => (
           <div key={index}>
-            {this.state.tilesAgentsStates[index].map((tileType, colIndex) => (
-              <Tile
-                tileType={
-                  tileType[0] === 'a' // is agent
-                    ? 'tile ' +
-                      GetAgentWithId(tileType, this.state.agents).state.type
-                    : tileType
-                }
-                key={index * this.state.rows + colIndex}
-                test={this.state.test}
-              />
-            ))}
+            {this.state.tilesAgentsStates[index].map(
+              (tileTypeOrAgentId, colIndex) => (
+                <Tile
+                  id={tileTypeOrAgentId}
+                  tileType={
+                    tileTypeOrAgentId[0] === 'a' // is agent
+                      ? 'tile ' +
+                        GetAgentWithId(tileTypeOrAgentId, this.state.agents)
+                          .state.type
+                      : tileTypeOrAgentId
+                  }
+                  agent={GetAgentWithId(tileTypeOrAgentId, this.state.agents)}
+                  key={index * this.state.rows + colIndex}
+                  test={this.state.test}
+                />
+              )
+            )}
           </div>
         ))}
       </div>

@@ -1,5 +1,7 @@
+import React from 'react';
 import { Component } from 'react';
 import AgentsData from '../AgentsContent.json';
+import { GetAgentIndexWithId } from '../Utility';
 
 class Agent extends Component {
   state = {};
@@ -22,6 +24,15 @@ class Agent extends Component {
       position: position
     };
   }
+
+  UpdateAgent = (newPlayerPosition) => {
+    this.state.position = newPlayerPosition;
+  };
+
+  PerformDeath = (agents) => {
+    let agentIndex = GetAgentIndexWithId(this.state.id, agents);
+    agents.splice(agentIndex, 1);
+  };
 }
 
 export default Agent;
