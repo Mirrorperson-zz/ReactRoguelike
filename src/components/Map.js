@@ -127,6 +127,22 @@ class Map extends Component {
 
     $(`#${activeAgentId}`).addClass('tile-clone');
 
+    let movedCss;
+    switch (moveDirection) {
+      case 'ArrowLeft':
+        movedCss = { left: absolutePosition.left - tileDimention };
+        break;
+      case 'ArrowUp':
+        movedCss = { top: absolutePosition.top - tileDimention };
+        break;
+      case 'ArrowRight':
+        movedCss = { left: absolutePosition.left + tileDimention };
+        break;
+      case 'ArrowDown':
+        movedCss = { top: absolutePosition.top + tileDimention };
+        break;
+    }
+
         agents: newState.agents,
         tileStates: newState.tileStates
       }));
