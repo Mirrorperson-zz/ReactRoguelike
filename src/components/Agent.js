@@ -29,7 +29,10 @@ class Agent extends Component {
     this.state.position = newPlayerPosition;
   };
 
+  PerformDeath = (agents) => {
     let agentIndex = GetAgentIndexWithId(this.state.id, agents);
+    agents.splice(agentIndex, 1);
+  };
 }
 
 export default Agent;
