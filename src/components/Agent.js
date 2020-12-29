@@ -1,8 +1,7 @@
+import React from 'react';
 import { Component } from 'react';
 import AgentsData from '../AgentsContent.json';
-import {
-  GetAgentIndexWithId
-} from '../Utility';
+import { GetAgentIndexWithId } from '../Utility';
 
 class Agent extends Component {
   state = {};
@@ -22,8 +21,7 @@ class Agent extends Component {
       dex: AgentsData[props.type].dex,
       wis: AgentsData[props.type].wis,
       int: AgentsData[props.type].int,
-      position: position,
-      tileCodeAgentOn: 1 // could replace with random tile
+      position: position
     };
   }
 
