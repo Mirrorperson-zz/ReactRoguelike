@@ -11,6 +11,8 @@ import {
   UpdateStateWithAgents
 } from '../Utility';
 import _ from 'lodash';
+import $ from 'jquery';
+window.jQuery = window.$ = $;
 
 class Map extends Component {
   state = {
