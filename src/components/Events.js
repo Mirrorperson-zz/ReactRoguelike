@@ -12,8 +12,7 @@ const GetNewAgentPosition = (
   eventKey,
   columnsNum,
   rowsNum,
-  frontGap,
-  backGap
+  mapEdgeGap
 ) => {
   let newPosition;
 
@@ -34,12 +33,12 @@ const GetNewAgentPosition = (
       newPosition = oldPosition;
   }
 
-  // check boundaries, affect player agent only
+  // check boundaries - leaving map
   if (
-    newPosition[0] < frontGap ||
-    newPosition[0] >= columnsNum - backGap ||
-    newPosition[1] < frontGap ||
-    newPosition[1] >= rowsNum - backGap
+    newPosition[0] < mapEdgeGap ||
+    newPosition[0] >= columnsNum - mapEdgeGap ||
+    newPosition[1] < mapEdgeGap ||
+    newPosition[1] >= rowsNum - mapEdgeGap
   ) {
     return;
   }
@@ -74,16 +73,18 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
   let newAgents = state.agents.map((a) => Object.assign({}, a));
   let agent = GetAgentWithId(agentId, newAgents);
 
+  let mapEdgeGap = agent.state.type === 'player' ? state.playerPosEdgeGap : 0;
+
   let newAgentPosition = GetNewAgentPosition(
     oldAgentPosition,
     eventKey,
     state.columns,
     state.rows,
-    state.playerPosFrontEdgeGap,
-    state.playerPosBackEdgeGap
+    mapEdgeGap,
+    agent.state.type
   );
 
-  // no movement, collison or invalid
+  // invalid movement outside of boundary
   if (typeof newAgentPosition === 'undefined') return;
 
   let newTilesStates = UpdateAgentPosition(
