@@ -4,10 +4,10 @@ import Agent from './Agent';
 import { HandleEvent, HandleAgentEvents } from './Events';
 import { GetNewState } from '../WorldGeneration/MapGeneration';
 import {
-  UpdateStateWithAgents,
   InitializeAgents
-} from '../WorldGeneration/AgentsGeneration';
 import { GetPlayerAgentId, GetAgentWithId, ConsoleLogTest } from '../Utility';
+  UpdateStateWithAgents
+} from '../Utility';
 import _ from 'lodash';
 
 class Map extends Component {

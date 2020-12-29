@@ -52,6 +52,15 @@ const RollRandom = (max, min = 1) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
+const UpdateStateWithAgents = (newTilesStates, newAgents) => {
+  let newTilesAgentsStates = [...newTilesStates.map((x) => [...x])];
+
+  newAgents.forEach((agent) => {
+    let agentPosition = agent.state.position;
+    newTilesAgentsStates[agentPosition[0]][agentPosition[1]] = agent.state.id;
+  });
+
+  return newTilesAgentsStates;
 };
 
 export {
@@ -64,4 +73,5 @@ export {
   GetPlayerAgentId,
   GetTargetAgent,
   GetAgentIndexWithId,
+  UpdateStateWithAgents
 };

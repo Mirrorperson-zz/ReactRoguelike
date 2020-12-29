@@ -65,18 +65,4 @@ const CreateAgent = (id, type, position = null) => {
   return new Agent({ id, type, position });
 };
 
-const UpdateStateWithAgents = (newTilesStates, newAgents) => {
-  // set player - x and y are reversed, because array within array
-  let playerAgent = GetAgentWithId('a0', newAgents);
-  let playerPosition = playerAgent.state.position;
-  newTilesStates[playerPosition[0]][playerPosition[1]] = playerAgent.state.id;
-
-  newAgents.forEach((agent) => {
-    let agentPosition = agent.state.position;
-    newTilesStates[agentPosition[0]][agentPosition[1]] = agent.state.id;
-  });
-
-  return newTilesStates;
-};
-
-export { CreateAgent, UpdateStateWithAgents, InitializeAgents };
+export { CreateAgent, InitializeAgents };
