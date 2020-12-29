@@ -1,5 +1,7 @@
-import { GetAgentWithId, ConsoleLogTest, RollRandom } from '../Utility';
 import {
+  GetAgentWithId,
+  ConsoleLogTest,
+  RollRandom,
   GetTargetAgent,
   UpdateStateWithAgents
 } from '../Utility';
