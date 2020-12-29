@@ -85,6 +85,11 @@ class Map extends Component {
 
   componentDidUpdate() {
     let newState = HandleAgentEvents(this.state.agents, this.state);
+    // player's turn handled by handleKeyPress
+    if (this.state.playersTurn) {
+      return;
+    }
+
 
     let stateActiveAgentIdAndDirection = HandleAgentEvents(this.state);
 
