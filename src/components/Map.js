@@ -77,7 +77,8 @@ class Map extends Component {
     if (!_.isEqual(player.state.position, oldPlayerPosition)) {
       this.setState((state) => ({
         agents: newState.agents,
-        tileStates: newState.tileStates
+        tilesAgentsStates: newState.tilesAgentsStates,
+        playersTurn: false
       }));
     }
   };
