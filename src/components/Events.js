@@ -118,34 +118,39 @@ const HandleAgentEvents = (state) => {
     return null;
   }
 
-  // Todo make decision making smarter
-  // may need to move to agent class if quite large
-  let directionRoll = RollRandom(4);
+  let newState;
+  let directionRoll;
   let eventKey;
 
-  switch (directionRoll) {
-    case 1:
-      eventKey = 'ArrowLeft';
-      break;
-    case 2:
-      eventKey = 'ArrowUp';
-      break;
-    case 3:
-      eventKey = 'ArrowRight';
-      break;
-    case 4:
-      eventKey = 'ArrowDown';
-      break;
+  while (newState === undefined) {
+    // Todo make decision making smarter
+    // may need to move to agent class if quite large
+    directionRoll = RollRandom(4);
+
+    switch (directionRoll) {
+      case 1:
+        eventKey = 'ArrowLeft';
+        break;
+      case 2:
+        eventKey = 'ArrowUp';
+        break;
+      case 3:
+        eventKey = 'ArrowRight';
+        break;
+      case 4:
+        eventKey = 'ArrowDown';
+        break;
+    }
+
+    newState = HandleEvent(
+      activeAgent.state.id,
+      activeAgent.state.position,
+      eventKey,
+      state
+    );
   }
 
-  let newState = HandleEvent(
-    activeAgent.state.id,
-    activeAgent.state.position,
-    eventKey,
-    state
-  );
-
-  return newState;
+  return [newState, activeAgent.state.id, eventKey];
 };
 
-export { HandleEvent, UpdateAgentPosition, HandleAgentEvents };
+export { GetNewAgentPosition, GetActiveAgent, HandleEvent, HandleAgentEvents };
