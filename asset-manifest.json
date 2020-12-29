@@ -1,14 +1,14 @@
 {
-  "main.css": "/ReactRoguelike/static/css/main.8fe48e86.chunk.css",
-  "main.js": "/ReactRoguelike/static/js/main.0acca56d.chunk.js",
-  "main.js.map": "/ReactRoguelike/static/js/main.0acca56d.chunk.js.map",
-  "static/js/1.a913cd8e.chunk.js": "/ReactRoguelike/static/js/1.a913cd8e.chunk.js",
-  "static/js/1.a913cd8e.chunk.js.map": "/ReactRoguelike/static/js/1.a913cd8e.chunk.js.map",
+  "main.css": "/ReactRoguelike/static/css/main.0c02839c.chunk.css",
+  "main.js": "/ReactRoguelike/static/js/main.6b176018.chunk.js",
+  "main.js.map": "/ReactRoguelike/static/js/main.6b176018.chunk.js.map",
+  "static/js/1.a7ebe4bc.chunk.js": "/ReactRoguelike/static/js/1.a7ebe4bc.chunk.js",
+  "static/js/1.a7ebe4bc.chunk.js.map": "/ReactRoguelike/static/js/1.a7ebe4bc.chunk.js.map",
   "runtime~main.js": "/ReactRoguelike/static/js/runtime~main.927658f3.js",
   "runtime~main.js.map": "/ReactRoguelike/static/js/runtime~main.927658f3.js.map",
   "static/media/logo.svg": "/ReactRoguelike/static/media/logo.5d5d9eef.svg",
-  "static/css/main.8fe48e86.chunk.css.map": "/ReactRoguelike/static/css/main.8fe48e86.chunk.css.map",
+  "static/css/main.0c02839c.chunk.css.map": "/ReactRoguelike/static/css/main.0c02839c.chunk.css.map",
   "index.html": "/ReactRoguelike/index.html",
-  "precache-manifest.276b7c5e781c85ff0e890448393f5a2f.js": "/ReactRoguelike/precache-manifest.276b7c5e781c85ff0e890448393f5a2f.js",
+  "precache-manifest.139efb80a030395875daf1dc366d7da2.js": "/ReactRoguelike/precache-manifest.139efb80a030395875daf1dc366d7da2.js",
   "service-worker.js": "/ReactRoguelike/service-worker.js"
 }
