@@ -46,30 +46,10 @@ const GetNewAgentPosition = (
   return newPosition;
 };
 
-const UpdateAgentPosition = (
-  agent,
-  newAgentPosition,
-  oldAgentPosition,
-  tilesStates
-) => {
-  let newState = tilesStates.slice(0);
-  // Add old tile code player is on
-  newState[oldAgentPosition[0]][oldAgentPosition[1]] =
-    agent.state.tileCodeAgentOn;
-
-  agent.UpdateAgent(newAgentPosition, tilesStates);
-
-  // Add agent to new tile
-  newState[newAgentPosition[0]][newAgentPosition[1]] = agent.state.id;
-
-  return newState;
-};
-
 const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
   // check keys
   ConsoleLogTest(state.test, 'key pressed ' + eventKey);
 
-  let tilesStates = state.tilesStates;
   let newAgents = state.agents.map((a) => Object.assign({}, a));
   let agent = GetAgentWithId(agentId, newAgents);
 
@@ -87,11 +67,6 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
   // invalid movement outside of boundary
   if (typeof newAgentPosition === 'undefined') return;
 
-  let newTilesStates = UpdateAgentPosition(
-    agent,
-    newAgentPosition,
-    oldAgentPosition,
-    tilesStates
   // Update agents with deaths and position changes
   let enemyAgent = GetTargetAgent(newAgentPosition, newAgents, state);
   let newTilesAgentsStates = UpdateStateWithAgents(
