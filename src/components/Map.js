@@ -143,10 +143,14 @@ class Map extends Component {
         break;
     }
 
+    $(`#${activeAgentId}Clone`).animate(movedCss, 1000, () => {
+      // remove clones update state
+      $(`div[id$=Clone]`).remove();
+      thisAppMap.setState((state) => ({
         agents: newState.agents,
-        tileStates: newState.tileStates
+        tilesAgentsStates: newState.tilesAgentsStates
       }));
-    }
+    });
   }
 
   render() {
