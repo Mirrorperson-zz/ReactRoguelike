@@ -1,5 +1,8 @@
 import { Component } from 'react';
 import AgentsData from '../AgentsContent.json';
+import {
+  GetAgentIndexWithId
+} from '../Utility';
 
 class Agent extends Component {
   state = {};
@@ -34,6 +37,8 @@ class Agent extends Component {
       mapState[newPlayerPosition[1]][newPlayerPosition[0]];
     this.state.position = newPlayerPosition;
   };
+
+    let agentIndex = GetAgentIndexWithId(this.state.id, agents);
 }
 
 export default Agent;

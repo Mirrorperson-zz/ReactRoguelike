@@ -20,6 +20,12 @@ const GetTile = (state, row, column) => {
   return state[row][column];
 };
 
+const GetAgentIndexWithId = (id, agents) => {
+  return agents.findIndex((agent) => {
+    return agent.state.id === id;
+  });
+};
+
 const GetAgentWithId = (id, agents) => {
   return agents.find((agent) => {
     return agent.state.id === id;
@@ -48,4 +54,5 @@ export {
   ConsoleLogTest,
   RollRandom,
   GetPlayerAgentId
+  GetAgentIndexWithId,
 };
