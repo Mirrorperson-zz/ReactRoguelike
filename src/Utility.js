@@ -32,6 +32,11 @@ const GetAgentWithId = (id, agents) => {
   });
 };
 
+const GetTargetAgent = (position, agents, state) => {
+  let agentId = state.tilesAgentsStates[position[0]][position[1]];
+  return GetAgentWithId(agentId, agents);
+};
+
 const GetAgentTypes = () => {
   return Object.keys(AgentsData);
 };
@@ -54,5 +59,6 @@ export {
   ConsoleLogTest,
   RollRandom,
   GetPlayerAgentId
+  GetTargetAgent,
   GetAgentIndexWithId,
 };

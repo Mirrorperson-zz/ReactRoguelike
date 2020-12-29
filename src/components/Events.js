@@ -1,4 +1,7 @@
 import { GetAgentWithId, ConsoleLogTest, RollRandom } from '../Utility';
+import {
+  GetTargetAgent,
+} from '../Utility';
 import _ from 'lodash';
 
 const GetNewAgentPosition = (
@@ -85,6 +88,8 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
     newAgentPosition,
     oldAgentPosition,
     tilesStates
+  // Update agents with deaths and position changes
+  let enemyAgent = GetTargetAgent(newAgentPosition, newAgents, state);
   );
 
   return {
