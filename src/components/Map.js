@@ -159,18 +159,23 @@ class Map extends Component {
       <div tabIndex="0" onKeyDown={this.handleKeyPress}>
         {this.state.tilesAgentsStates.map((rows, index) => (
           <div key={index}>
-            {this.state.tilesAgentsStates[index].map((tileType, colIndex) => (
-              <Tile
-                tileType={
-                  tileType[0] === 'a' // is agent
-                    ? 'tile ' +
-                      GetAgentWithId(tileType, this.state.agents).state.type
-                    : tileType
-                }
-                key={index * this.state.rows + colIndex}
-                test={this.state.test}
-              />
-            ))}
+            {this.state.tilesAgentsStates[index].map(
+              (tileTypeOrAgentId, colIndex) => (
+                <Tile
+                  id={tileTypeOrAgentId}
+                  tileType={
+                    tileTypeOrAgentId[0] === 'a' // is agent
+                      ? 'tile ' +
+                        GetAgentWithId(tileTypeOrAgentId, this.state.agents)
+                          .state.type
+                      : tileTypeOrAgentId
+                  }
+                  agent={GetAgentWithId(tileTypeOrAgentId, this.state.agents)}
+                  key={index * this.state.rows + colIndex}
+                  test={this.state.test}
+                />
+              )
+            )}
           </div>
         ))}
       </div>
