@@ -25,14 +25,7 @@ class Agent extends Component {
     };
   }
 
-  // Need to make this generic update agent position
-  UpdateAgent = (
-    newPlayerPosition,
-    mapState
-    // Flip when use as rows in columns means need [y,x]
-  ) => {
-    this.state.tileCodeAgentOn =
-      mapState[newPlayerPosition[1]][newPlayerPosition[0]];
+  UpdateAgent = (newPlayerPosition) => {
     this.state.position = newPlayerPosition;
   };
 
