@@ -34,6 +34,10 @@ const GetNewAgentPosition = (
       newPosition = oldPosition;
   }
 
+  // to do: enemies cant leave map atm because it tries to find
+  // what tile the the position is in agent.UpdateAgent() and
+  // try to access index out of range of array
+
   // check boundaries - leaving map
   if (
     newPosition[0] < mapEdgeGap ||
