@@ -90,24 +90,29 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
   };
 };
 
-const HandleAgentEvents = (agents, state) => {
-  let activeAgent;
+const GetActiveAgent = (agents) => {
+  // return agents[RollRandom(agents.length)-1];
+
   let rollUpperLimits = [];
-  let lastUpperLimit;
+  let previousUpperLimit;
 
   agents.forEach((a, i) => {
-    lastUpperLimit = i === 0 ? 0 : rollUpperLimits[i - 1];
-    rollUpperLimits.push(a.state.agi + RollRandom(10) + lastUpperLimit);
+    previousUpperLimit = i === 0 ? 0 : rollUpperLimits[i - 1];
+    rollUpperLimits.push(a.state.agi + RollRandom(10) + previousUpperLimit);
   });
 
   // Roll up to max of sum
   let activeAgentRoll = RollRandom(rollUpperLimits[rollUpperLimits.length - 1]);
 
-  rollUpperLimits.forEach((l, i) => {
-    if (activeAgent === undefined && activeAgentRoll < l) {
-      activeAgent = agents[i];
+  for (const [index, limit] of Object.entries(rollUpperLimits)) {
+    if (activeAgentRoll < limit) {
+      return agents[index];
     }
-  });
+  }
+};
+
+const HandleAgentEvents = (state) => {
+  let activeAgent = GetActiveAgent(state.agents);
 
   if (activeAgent.state.type === 'player') {
     return;
