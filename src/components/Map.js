@@ -108,6 +108,25 @@ class Map extends Component {
       [newState, activeAgentId, moveDirection] = stateActiveAgentIdAndDirection;
     }
 
+    // animation start
+    var animateAgent = $(`#${activeAgentId}`);
+    absolutePosition = animateAgent.position();
+
+    // Cannot read property 'left' of undefined - absolutePosition occur if
+    // original tile is not on dom because of collison - if combat system were
+    // in place agent would be removed so it couldn't move if it wasnt in the dom
+    $(`#${activeAgentId}`)
+      .clone()
+      .prop('id', `${activeAgentId}Clone`)
+      .css({
+        position: 'absolute',
+        left: absolutePosition.left,
+        top: absolutePosition.top
+      })
+      .appendTo($(`#${activeAgentId}`).parent());
+
+    $(`#${activeAgentId}`).addClass('tile-clone');
+
         agents: newState.agents,
         tileStates: newState.tileStates
       }));
