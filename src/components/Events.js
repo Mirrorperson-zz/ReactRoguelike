@@ -5,6 +5,7 @@ import {
   GetTargetAgent,
   UpdateStateWithAgents
 } from '../Utility';
+import { EvaluateCombat } from '../components/Combat';
 import _ from 'lodash';
 
 const GetNewAgentPosition = (
@@ -69,6 +70,10 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
 
   // Update agents with deaths and position changes
   let enemyAgent = GetTargetAgent(newAgentPosition, newAgents, state);
+  if (enemyAgent) {
+    EvaluateCombat(agent, enemyAgent, newAgents);
+  }
+
   let newTilesAgentsStates = UpdateStateWithAgents(
     state.tilesStates,
     newAgents
