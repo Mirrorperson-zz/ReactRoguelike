@@ -3,9 +3,11 @@ import Tile from './Tile';
 import Agent from './Agent';
 import { HandleEvent, HandleAgentEvents } from './Events';
 import { GetNewState } from '../WorldGeneration/MapGeneration';
+import { InitializeAgents } from '../WorldGeneration/AgentsGeneration';
 import {
-  InitializeAgents
-import { GetPlayerAgentId, GetAgentWithId, ConsoleLogTest } from '../Utility';
+  GetPlayerAgentId,
+  GetAgentWithId,
+  ConsoleLogTest,
   UpdateStateWithAgents
 } from '../Utility';
 import _ from 'lodash';
