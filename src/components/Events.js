@@ -91,8 +91,6 @@ const HandleEvent = (agentId, oldAgentPosition, eventKey, state) => {
 };
 
 const GetActiveAgent = (agents) => {
-  // return agents[RollRandom(agents.length)-1];
-
   let rollUpperLimits = [];
   let previousUpperLimit;
 
