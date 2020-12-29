@@ -30,8 +30,8 @@ class Map extends Component {
     ponds: [],
     condenseLimit: 3,
     agents: [],
-    playerPosFrontEdgeGap: 2,
-    playerPosBackEdgeGap: 2
+    playerPosEdgeGap: 2,
+    playersTurn: true
   };
 
   constructor(props) {
@@ -59,6 +59,11 @@ class Map extends Component {
 
   // movement controls
   handleKeyPress = (event) => {
+    // discard input
+    if (!this.state.playersTurn) {
+      return;
+    }
+
     let player = GetAgentWithId(GetPlayerAgentId(), this.state.agents);
     let oldPlayerPosition = [...player.state.position];
 
