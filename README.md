@@ -1,15 +1,18 @@
-Thoughts
+Basic roguelike game built on create­react­app
 
-Agent is an abstract class for all living things in the game
-
-The stats and specifics of each species/race or whatever is going to be in a json file called AgentsContent
-
-CompleteAgent is a stateless functional component whoose only job is to get the data from AgentsContent json make
-an agent with complete stats and other details with it
-
-This generic design hopefully means I dont have to make a lot of classes for each living thing
+Goals
+- Written in react and can be played on browsers
+- Support modding agents that doesn't require programming
+- Add procedural generation of terrain and agents for replayability
+- Keep game state and events easy to understand with ui, sprites and animation
 
 ---
+
+Dev info
+
+Game loop is in Map.js and uses handleKepPress which handles players input and componentDidUpdate which handles npc turns and animations.
+
+Agent is a class for all living things in the game. The stats and specifics of each species/race/agent is going to be in a json file called AgentsContent. This generic design means new agents can be creating using json and won't require programming.
 
 Branch current-wip-stuff exists only to allow moving unfinished work around
 
